@@ -28,16 +28,16 @@ class TestAuthor:
         assert isinstance(author_2.name, str)
 
         # comment out the next two lines if using Exceptions
-        author_1.name = "ActuallyTopher"
-        assert author_1.name == "Carry Bradshaw"
+        # author_1.name = "ActuallyTopher"
+        # assert author_1.name == "Carry Bradshaw"
 
         # comment out the next two lines if using Exceptions
-        author_2.name = 2
-        assert author_2.name == "Nathaniel Hawthorne"
+        # author_2.name = 2
+        # assert author_2.name == "Nathaniel Hawthorne"
 
         # uncomment the next two lines if using Exceptions
-        # with pytest.raises(Exception):
-        #     Author(2)
+        with pytest.raises(Exception):
+            Author(2)
 
     def test_name_len(self):
         """author name is longer than 0 characters"""
@@ -55,6 +55,7 @@ class TestAuthor:
 
     def test_has_many_articles(self):
         """author has many articles"""
+        Article.all = []
         author_1 = Author("Carry Bradshaw")
         author_2 = Author("Nathaniel Hawthorne")
         magazine = Magazine("Vogue", "Fashion")
@@ -81,6 +82,9 @@ class TestAuthor:
         assert isinstance(author_2.articles()[0], Article)
 
     def test_has_many_magazines(self):
+        Magazine.all = []
+        Article.all = []
+        Author.all = []
         """author has many magazines"""
         author_1 = Author("Carry Bradshaw")
         magazine_1 = Magazine("Vogue", "Fashion")
@@ -109,6 +113,9 @@ class TestAuthor:
         assert isinstance(author_2.magazines()[0], Magazine)
 
     def test_magazines_are_unique(self):
+        Magazine.all = []
+        Article.all = []
+        Author.all = []
         """author magazines are unique"""
         author_1 = Author("Carry Bradshaw")
         magazine_1 = Magazine("Vogue", "Fashion")
@@ -121,6 +128,9 @@ class TestAuthor:
         assert len(author_1.magazines()) == 2
 
     def test_add_article(self):
+        Magazine.all = []
+        Article.all = []
+        Author.all = []
         """creates and returns a new article given a magazine and title"""
         author_1 = Author("Carry Bradshaw")
         magazine_1 = Magazine("Vogue", "Fashion")
@@ -138,6 +148,9 @@ class TestAuthor:
         assert article_3 in magazine_2.articles()
 
     def test_topic_areas(self):
+        Magazine.all = []
+        Article.all = []
+        Author.all = []
         """returns a list of topic areas for all articles by author"""
         author_1 = Author("Carry Bradshaw")
         author_2 = Author("Nathaniel Hawthorne")
