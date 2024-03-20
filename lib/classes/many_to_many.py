@@ -11,7 +11,9 @@ class Article:
         return self._title 
     @title.setter
     def title(self,title):
-        if not isinstance(title,str):
+        if hasattr(self, "title"):
+            raise AttributeError('Cannot edit name')
+        elif not isinstance(title,str):
             raise ValueError('Must be a string')
         else:
             self._title = title
@@ -31,6 +33,8 @@ class Author:
             raise AttributeError('Cannot edit name')
         elif not isinstance(name, str):
             raise ValueError('Must be a string')
+        elif not len(name) > 0:
+            raise ValueError('MUST BE LONGER THAN 0')
         else:
             self._name = name
         
